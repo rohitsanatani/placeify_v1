@@ -1,12 +1,10 @@
 # Ignore GSV + Feature data
-data/*
-data/urbandata/*
-data/userdata/*
+data/**
 
-!data/.gitkeep
+!data/
+!data/**/
+!data/**/.gitkeep
 !data/sample_config.json
-!data/urbandata/.gitkeep
-!data/userdata/.gitkeep
 
 # Ignore compiled Python files
 __pycache__/
