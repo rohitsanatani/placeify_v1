@@ -1,0 +1,13 @@
+{
+"gsv_dir": 
+    {"london":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "amsterdam":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "newyork":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "boston":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "mumbai":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "buenosaires": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "placepulse": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "globalstreetscapes50k":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"},
+"users":["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], 
+"API_key":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}

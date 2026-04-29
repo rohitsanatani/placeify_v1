@@ -1,0 +1,98 @@
+@font-face {
+    font-family: Oswald;
+    src: url(/getfile?filename=Oswald-Regular.ttf&directory=templates/assets/fonts/Oswald);
+  }
+@font-face {
+    font-family: Alata;
+    src: url(/getfile?filename=Alata-Regular.ttf&directory=templates/assets/fonts);
+  }
+@font-face {
+    font-family: Ubuntu;
+    src: url(/getfile?filename=Ubuntu-Regular.ttf&directory=templates/assets/fonts);
+  }
+@font-face {
+    font-family: Roboto;
+    src: url(/getfile?filename=Roboto-Regular.ttf&directory=templates/assets/fonts);
+  }
+
+  :root {
+    --titlefont: Alata;
+    --textfont: Alata;
+  }
+
+body{
+    font-family: sans-serif;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#titletext{
+    color: aliceblue;
+    font-size: 36pt;
+    font-family: var(--titlefont);
+    margin: 10px;
+}
+
+#deniedtext{
+    color: aliceblue;
+    font-size: 18pt;
+}
+
+#content{
+    margin: auto;
+    text-align: center;
+}
+
+#userpack{
+    padding: 25px;
+    display: none;
+}
+
+#usertext{
+    color: aliceblue;
+    font-size: 12pt;
+    font-family: var(--textfont);
+}
+
+#arrow{
+    cursor: pointer;
+}
+
+#about_header{
+    position: absolute;
+    top: 20px;
+    text-align: center;
+}
+
+.footer{
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    color: gainsboro;
+    font-family: var(--textfont);
+}
+
+#sandbox{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbutton {
+    border-style: solid;
+    border-color: aliceblue;
+    border-radius: 20%;
+    background-color: black;
+    color: aliceblue;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: var(--textfont);
+  }
+

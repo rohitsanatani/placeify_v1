@@ -1,0 +1,271 @@
+<html>
+<head>
+    <title>Placeify!</title>
+    <link href="/getfile?filename=bootstrap.min.css&directory=templates/libraries/bootstrap" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="/getfile?filename=bootstrap.bundle.min.js&directory=templates/libraries/bootstrap" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
+    <link rel="stylesheet" href="/getfile?filename=styles.css&directory=templates">
+</head>
+<body>
+    <div id = "banner" class = "row g-0">
+        <div class = "col-6">
+            <img class = "logo" src="/getfile?filename=logo.png&directory=templates" width="50" height="50">
+            <h2 id = "title">PLACEIFY</h2>
+        </div>
+        <div class = "col-6">
+            <div id = "headertext">Evaluate by Analogy!</div>
+        </div>
+    </div>
+    <div id = "bodycontent" class = "row g-0">
+        <div id = "leftpanel">
+            <div id = "mapplot" class = "row g-0 rounded_corner">
+                <div id = "mapbanner" class = "row g-0">
+                    <div class = "bannertext">Similarity Explorer</div>
+                </div>
+                <div id = "map_div_1" class = "map_div">
+                    <div id="map" class = "map"></div>
+                    <div id="mapcontrols">
+                        <label for="showsim" class="selectorlabel" >Style by:</label>
+                        <select name="showsim" id="analogyselector" class = 'selector' onchange="renderAll()">
+                        </select>
+                        <label for="stylescale" class="selectorlabel" >Filter strength:</label>
+                        <input type="range" name="stylescale" min="0" max="50" value= 10 class="slider" id="style_slider" onchange="renderSamples()">
+                        <label id = "citysellabel" for="city" class="selectorlabel" >City:</label>
+                        <select name="city" id="cityselector" class = 'selector' onchange="loadDataAndRender()">
+                            <!-- <option value='amsterdam'>Amsterdam</option>
+                            <option value='london'>London</option>
+                            <option value='newyork'>New York</option>
+                            <option value='mumbai'>Mumbai</option>
+                            <option value='boston'>Boston</option> -->
+                        </select>
+                        <!-- <select id="view2selector" class = 'selector' onchange="setView2()">
+                            <option value='plot'>Plot</option>
+                            <option value='map'>Map</option>
+                        </select> -->
+                        <!-- <button type="button" class = "accentbutton" onclick="togglePlot()">Toggle Plot</button> -->
+                        <!-- new dropdown to replace togglePlot button -->
+                        <select id="view_selector" onchange="switchView()">
+                            <option value="map_only">Full Map</option>
+                            <option value="map_images">Map + Images</option>
+                            <option value="map_plot">Map + Plot</option>
+                        </select>
+                        <!-- end of new dropdown to replace toggleplot button -->
+                    </div>
+                </div>
+                <!-- <div id = "map_div_2" class = "map_div">
+                    <div id="map2" class = "map"></div>
+                    <label id = "citysellabel2" for="city2" class="selectorlabel" >City:</label>
+                    <select name="city2" id="cityselector2" class = 'selector' onchange="changeCityWindow()">
+                        <option value='NewYork'>New York</option>
+                        <option value='Mumbai'>Mumbai</option>
+                        <option value='Boston'>Boston</option>
+                    </select>
+                </div> -->
+                <div id = "plot_div">
+                    <div id="plot1"></div>
+                    <div id="plotcontrols">
+                        <label for="operationselector">Plot Style</label>
+                        <select name="operation" id="operationselector" class = 'selector' onchange="renderPlot()">
+                            <option value="analogical">Analogical</option>
+                            <option value="params">Features</option>
+                            <option value="pca">PCA</option>
+                        </select>
+                        <label id = "axislabel0" for="selectaxis0" class="selectorlabel">X</label>
+                        <select name="selectaxis0" id="axisselector0" class = 'selector' onchange="renderPlot()">
+                            <option value='tree'>Greenery</option>
+                            <option value='building'>Buildings</option>
+                            <option value='sky'>Sky</option>
+                            <option value='car'>Automobile</option>
+                            <option value='person'>People</option>
+                            <option value='road'>Road</option>
+                        </select>
+                        <label id = "axislabel1" for="selectaxis1" class="selectorlabel">Y</label>
+                        <select name="selectaxis1" id="axisselector1" class = 'selector' onchange="renderPlot()">
+                            <option value='tree'>Greenery</option>
+                            <option value='building'>Buildings</option>
+                            <option value='sky'>Sky</option>
+                            <option value='car'>Automobile</option>
+                            <option value='person'>People</option>
+                            <option value='road'>Road</option>
+                        </select>
+                        <label id = "axislabel2" for="selectaxis2" class="selectorlabel">Z</label>
+                        <select name="selectaxis2" id="axisselector2" class = 'selector' onchange="renderPlot()">
+                            <option value='tree'>Greenery</option>
+                            <option value='building'>Buildings</option>
+                            <option value='sky'>Sky</option>
+                            <option value='car'>Automobile</option>
+                            <option value='person'>People</option>
+                            <option value='road'>Road</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- new top image div -->
+                <div id="image_div">
+                    <!-- Dummy placeholders -->
+                    <div id="top_images"></div>
+                    <div id="image_controls">
+                        <select id="image_count_selector" onchange="renderImageGrid(this.value)">
+                            <option value="24">24</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- end of new top image div -->
+            </div>
+            <div class = "rounded_corner" id = "explorercomponents">
+                <div id = "explorerbanner" class = "row g-0 rounded_corner_top">
+                    <div  class = "bannertext">Place Explorer</div>
+                </div>
+                <div id = "explorer" class = "row g-0">
+                    <div id = 'panopanel'>
+                        <div id = "panoImgBlock">
+                            <img class = "panoImg" id = "panoImg0"src="/getfile?filename=img.jpg&directory=templates">
+                            <img class = "panoImg" id = "panoImg90"src="/getfile?filename=img.jpg&directory=templates">
+                            <img class = "panoImg" id = "panoImg180"src="/getfile?filename=img.jpg&directory=templates">
+                            <img class = "panoImg"id = "panoImg270"src="/getfile?filename=img.jpg&directory=templates">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id = "rightpanel">
+            <div class = "rightconstituent rounded_corner" id = "rightconstituenttop">
+                <div class = "formbanner">
+                    <div  class = "bannertext">Control Panel</div>
+                </div>
+                <div class = "scroll">
+                    <div class = "buttonpack rightbuttons">
+                        <button id = "img_btn" type="button" class="accentbutton" onclick="setPlaceifyType('image')">Images</button>
+                        <button id = "txt_btn" type="button" class="accentbutton" onclick="setPlaceifyType('text')">Text</button>
+                        <button id = "loc_btn" type="button" class="accentbutton" onclick="setPlaceifyType('location')">Locations</button>
+                        <button id = "prm_btn" type="button" class="accentbutton" onclick="setPlaceifyType('params')">Params</button>
+                    </div>
+                    <div id = 'imgcontrols'>
+                        <div>Select Images</div>
+                        <div id = "panoImgBlock2">
+                            <img class = "rightImg" id = "userImg0" src="/getfile?filename=img.jpg&directory=templates">
+                            <img class = "rightImg" id = "userImg1" src="/getfile?filename=img.jpg&directory=templates">
+                            <img class = "rightImg" id = "userImg2" src="/getfile?filename=img.jpg&directory=templates">
+                        </div>
+                        <form id = "form" action = "/processimgs" method = "post" enctype="multipart/form-data">
+                            <label for="model">Model:</label>
+                            <select id="model" name="model">
+                                <option value="siglip">SigLIP</option>
+                                <option value="sam">SAM2</option>
+                                <option value="mask2former">Mask2Former(ADE20K)</option>
+                            </select>
+                            <select name="metric" id="metricselector" class = 'selector'>
+                                <option value="cosine">Cosine</option>
+                                <option value="euclidean">Euclidean</option>
+                            </select>
+                            <input type = 'hidden' id = 'user' name = 'user'></input>
+                            <input type="hidden" id="weightsData" name="weightsData" value = "{Hidden Value: 0}"></input>
+                            <input id = "chooseimagebutton" type="file" name="file" multiple></input>
+                        </form>
+                    </div>
+                    <div id = 'locationcontrols'>
+                        <div>Select Locations<br><br>Click on upto 3 points on the map to select those locations as analogoues. Right click clears your selections</div>
+                    </div>
+                    <div id = 'paramcontrols'>
+                        <div>Set Urban Parameters<br><br>Modify any of the parameters below to define an urban scenario.</div>
+                    </div>
+                    <div id = 'textcontrols'>
+                        <div>Describe a place</div>
+                        <textarea id="place_descr" rows="3" cols="30">Describe in you own words the kind of place you have in mind</textarea>
+                    </div>
+                    <button id = "placeify_btn" type="button" class="accentbutton" onclick="triggerPlaceify()">Placeify!</button>
+                    <!-- <div class = "buttonpack">
+                        <button type="button" onclick="processLocs()">Placeify locations!</button>
+                        <button type="button" onclick="processParams()">Placeify parameters!</button>
+                    </div> -->
+                </div>
+            </div>
+            <div class = "rightconstituent rounded_corner" id = "rightconstituentmiddle">
+                <div class = "formbanner">
+                    <div class = "bannertext">Place Features</div>
+                </div>
+                <div class = "scroll">
+                    
+                    <!-- Feature Panel -->
+                    <div id = 'parampanel' style="display: block;">
+                        <div class = "formheader">
+                            <div>Visual Features</div>
+                        </div>
+                        <div id = 'viz_features' class = 'featureset'></div>
+                        <div class = "formheader">
+                            <div>Landuse Features</div>
+                        </div>
+                        <div id = 'landuse_features' class = 'featureset'></div>
+                        <div class = "formheader">
+                            <div>Demographic Features</div>
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="income_p" class="featurelabel" >Percap. Income:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="income_p">
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="income_h" class="featurelabel" >Hshld. Income:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="income_h">
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="popdensity" class="featurelabel" >Pop. Density:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="popdensity">
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="p_employed" class="featurelabel" >Perc. Employed:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="p_employed">
+                        </div>
+                        <div class = "formheader">
+                            <div>Configurational Features</div>
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="density" class="featurelabel" >Built Density:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="density">
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="integration" class="featurelabel" >Integration:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="integration">
+                        </div>
+                        <div class = 'featureblock'>
+                            <label for="network" class="featurelabel" >Network Type:</label>
+                            <input type="range" name="road" min="0" max="100" value= 50 class="slider" id="network">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "rightconstituent rounded_corner" id = "rightconstituentbottom">
+                <div class = "formbanner">
+                    <div>Place Details</div>
+                </div>
+                <div class = "scroll">
+                    <div id = "detailscontent">
+                        <div id = "sometext">Click on a data point to view place details</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id = "footer" class = "row g-0">
+        <div class = "col-4">
+            <img class = "logo" src="/getfile?filename=sandbox_logo_2_inv.png&directory=templates" height = "30">
+            <!-- <p>Copyright © 2024 Rohit Sanatani</p> -->
+        </div>
+        <div class = "col-4 offset-4" id = footer_button_div>
+            <button type="button" class = "footer_buttons">Docs</button>
+            <button type="button" class = "footer_buttons">Demo</button>
+        </div>
+    </div>
+    <div id="loading_popup">
+        <img id = "loading" src="/getfile?filename=loading.gif&directory=templates" width="100" height="100">
+        <h2 id = "loading_text">Placeifying! Please wait. This may take several minutes...</h2>
+        <p id = "log_text"></p>
+    </div>
+    <script>var user = "{{user}}"; var type = "{{type}}"; var scores_exist = "{{scores_exist}}"</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+<script src="/getfile?filename=script_result.js&directory=templates"></script>
+</body>
+</html>

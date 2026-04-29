@@ -1,0 +1,73 @@
+<html>
+   <head>
+      <title>Result</title>
+      <link rel="stylesheet" href="/download?filename=styles.css&directory=template">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+   </head>
+   <body>
+      <div class = 'child'>
+         <img src="/download?filename=logo.png&directory=template" width="50" height="50">
+         <h2>Placeify!</h2>
+         <h3>File processed successfully!</h3>
+         <p>Your image</p>
+         <img src="/download?filename={{filename}}&directory=upload" width="600" height="400">
+         <hr>
+         <h3>Listed below are the top 5 places in our database which are most similar to your uploaded image.</h3>
+         <p id = "locations_p"></p>
+         <hr>
+         <h3>Check out the locations of the similar places on the map below.</h3>
+         <div id="map"></div>
+         <a href='/upload'>Process another image!</a>
+      </div>
+   </body>
+   <script>
+
+      //const locations = JSON.parse('{{locations}}')
+      const locations = JSON.parse({{locations|tojson}})
+      const image_folder = "NY_gsv/"
+      var locations_str = ""
+      //console.log(locations)
+      //console.log(locations[0])
+
+      //get center lat long for results
+      lat_center = 0;
+      lon_center = 0;
+      for (i = 0; i < locations.length; i++){
+         lat_center = lat_center+locations[i]['lat'];
+         lon_center = lon_center+locations[i]['lon'];
+      }
+      lat_center = lat_center/locations.length;
+      lon_center = lon_center/locations.length;
+
+      //leaflet map setup
+      const map = L.map('map').setView([lat_center, lon_center], 10);         
+      var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+	   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	   subdomains: 'abcd',
+	   maxZoom: 20
+      }).addTo(map);
+      // show the scale bar on the lower left corner
+      L.control.scale({imperial: true, metric: true}).addTo(map);
+      radius = 250;
+
+
+      //loop through locations and populate html for div and markers for map
+      for (i = 0; i < locations.length; i++){
+         //locations_str = locations_str + "Coordinates :" + locations[i]['lat']+","+locations[i]['lon']+"<br>"
+         locations_str = locations_str + '<img src="/download?filename='+locations[i]['filename']+'&directory=gsv" width="600" height="400"><br>'
+         locations_str = locations_str + '<img src="/download?filename=loc_ico.png&directory=template" width="20" height="20">'
+         locations_str = locations_str + '<a href = "https://www.google.com/maps/@'+locations[i]['lat'].toString()+','+locations[i]['lon'].toString()+',18z">Explore Place</a><br><br>'
+
+         //add marker to map
+         var circle = L.circle([locations[i]['lat'], locations[i]['lon']], {
+          stroke:false,
+          fillColor: 'red',
+          fillOpacity: 1,
+          radius: radius,
+          }).addTo(map);
+      }
+      //console.log(locations_str)
+      document.getElementById("locations_p").innerHTML = locations_str;
+   </script>
+</html>

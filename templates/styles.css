@@ -1,0 +1,556 @@
+.muted {
+  --buttonslider: #8b776e;
+  --header_1: #292522;
+  --header_2: #4e6064;
+  --header_3: #4e6064;
+  --background_1: #eee9dd;
+  --background_2: #fffeff;
+  --headertext: #e4e3dc;
+  --headertext_2: #e4e3dc;
+  --titlefont: Alata;
+  --textfont: Roboto;
+}
+
+:root {
+  --buttonslider: #a06868;
+  --header_1: #161d2d;
+  --header_2: #648792;
+  --header_3: #b4c6ca;
+  --background_1: #4d4d4d;
+  --background_2: #f5f5f5;
+  --headertext: #e6e5e5;
+  --headertext_2: #e6e5e5;
+  --titlefont: Alata;
+  --textfont: Oswald;
+}
+
+/* mono_high_contrast */
+/* :root {
+  --buttonslider: #7a7a7a;
+  --header_1: #242424;
+  --header_2: #2e2e2e;
+  --header_3: #cfcfcf;
+  --background_1: #c4c4c4;
+  --background_2: #f5f5f5;
+  --headertext: #e6e5e5;
+  --headertext_2: #ffffff;
+  --titlefont: Alata;
+  --textfont: Oswald;
+} */
+
+/*mono*/
+/* :root {
+  --buttonslider: #636363;
+  --header_1: #d8d8d8;
+  --header_2: #d8d8d8;
+  --header_3: #ebebeb;
+  --background_1: #ffffff;
+  --background_2: #f5f5f5;
+  --headertext: #333333;
+  --headertext_2: #333333;
+  --titlefont: Alata;
+  --textfont: Oswald;
+} */
+
+@font-face {
+  font-family: Oswald;
+  src: url(/getfile?filename=Oswald-Regular.ttf&directory=templates/assets/fonts);
+}
+@font-face {
+  font-family: Alata;
+  src: url(/getfile?filename=Alata-Regular.ttf&directory=templates/assets/fonts);
+}
+@font-face {
+  font-family: Ubuntu;
+  src: url(/getfile?filename=Ubuntu-Regular.ttf&directory=templates/assets/fonts);
+}
+@font-face {
+  font-family: Roboto;
+  src: url(/getfile?filename=Roboto-Regular.ttf&directory=templates/assets/fonts);
+}
+
+body {
+  font-family: var(--textfont);
+  background-color: var(--background_2);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#title {
+  padding-top: 20px;
+  padding-left: 10px;
+  float: left;
+  font-size: 30;
+  color: var(--headertext);
+  font-family: Alata;
+}
+
+#banner {
+  background-color: var(--header_1);
+}
+
+.bannertext {
+  color: var(--headertext_2);
+}
+
+
+#bodycontent {
+  /*margin-bottom: 30px;*/
+  flex: 1;
+  /* padding-top: 5px; */
+  padding-bottom: 0px;
+  overflow: auto;
+}
+
+#footer {
+  width: 100%;
+  background-color: var(--header_1);
+  color: lightgray;
+  text-align: center;
+  align-items: center;
+}
+
+.logo {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  float: left;
+}
+
+#headertext {
+  margin-top: 20px;
+  margin-right: 20px;
+  text-align: right;
+  float: right;
+  font-size: 24;
+  color: var(--headertext);
+}
+
+#rightpanel {
+  height: 100%;
+  width: 25%;
+  background-color: var(--background_1);
+  text-align: center;
+  /* overflow: auto; */
+  display: flex;
+  flex-direction: column;
+}
+
+#leftpanel {
+  height: 100%;
+  width: 75%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background_1);
+}
+
+#form {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#parampanel {
+  flex: 1;
+  overflow: auto;
+}
+
+#explorer {
+  flex: 1;
+  overflow: auto;
+}
+
+#mapplot {
+  /* height: 60%; */
+  flex: 1;
+  /* resize: vertical; */
+  overflow: auto;
+  margin: 5px;
+}
+
+#explorercomponents {
+  height: 40%;
+  /* flex: 1; */
+  /* resize: vertical;
+    overflow: auto; */
+  margin: 5px;
+}
+
+.buttonpack {
+  padding-bottom: 10px;
+}
+
+.rightbuttons {
+  padding-top: 20px;
+}
+
+.accentbutton {
+  background-color: var(--buttonslider);
+  color: white;
+  border-width: 0;
+  border-radius: 10px;
+}
+
+#placeify_btn{
+  margin: 10px;
+}
+
+#chooseimagebutton {
+  margin-top: 5px;
+}
+
+.map_div {
+  /* width: 100%;
+    margin-bottom: 5px; */
+  width: 100%;
+  height: 90%;
+}
+
+#map_div_1{
+  width: 100%; /* Expand the map to take up the whole div when the plot is hidden */
+}
+
+#map_div_2 {
+  display: none;
+  /* display: block; */
+}
+
+#plot_div {
+  display: none;
+  width: 50%;
+  height: 75%;
+}
+
+#image_div {
+  display: none;
+  width: 50%;
+  height: 90%;
+  align-items: flex-start; 
+  justify-content: center;
+  overflow-y: auto;    
+  overflow-x: hidden;
+}
+
+#top_images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  width: min(70%, 100%);
+  height: min(70%, 100%);
+  
+  aspect-ratio: 1;          /* perfect square grid */
+  padding: 8px;
+  gap:4px; 
+  padding:8px;
+  margin-left:20px;
+}
+
+.top_image{
+  width: 100%;
+  aspect-ratio: 1; 
+  background:#aaa;
+  border-radius: 10px;
+}
+
+.top_image_img {
+  width: 100%;
+  height: 100%;     /* optional */
+  object-fit: cover; /* keeps aspect ratio nicely */
+  display: block;    /* removes inline gap */
+}
+
+.image_controls {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.map {
+  margin: 0 auto;
+  width: 100%;
+  /* height: 450px; */
+  height: 90%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#plot1 {
+  margin: 0 auto;
+  /* height: 450px; */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* #plotcontrols{
+  visibility: visible;
+} */
+
+.plot-container {
+  height: 100%;
+}
+
+.panoImg {
+  margin: 0 auto;
+  /* width: auto; */
+  height: 250px;
+  aspect-ratio: 1 / 1;
+  text-align: center;
+}
+
+#panoImg0 {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+#panoImg270 {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
+.rightImg {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#panopanel {
+  width: 100%;
+}
+
+#detailpanel {
+  /* width: 30%;
+    background-color: var(--light);
+    border-left: 5px solid var(--mid);
+    border-right: 5px solid var(--mid); */
+  display: none;
+}
+
+#panoImgBlock {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-left: 5px;
+  border-right: 5px;
+}
+
+#imgcontrols{
+  display: block;
+}
+
+#locationcontrols{
+  display: none;
+}
+
+#paramcontrols{
+  display: none;
+}
+
+#textcontrols{
+  display: none;
+}
+
+#panoImgBlock2 {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  bottom: 0;
+  /* border-left: 5px solid var(--mid);
+  border-right: 5px solid var(--mid); */
+}
+
+#img_btn{
+  background-color: var(--header_2);
+}
+
+
+#mapbanner {
+  color: var(--headertext_2);
+  background-color: var(--header_2);
+  text-align: center;
+  font-size: 16;
+  height: 24px;
+}
+
+#explorerbanner {
+  color: var(--headertext_2);
+  background-color: var(--header_2);
+  text-align: center;
+  font-size: 16;
+}
+
+.formbanner {
+  color: var(--headertext_2);
+  background-color: var(--header_2);
+  text-align: center;
+  font-size: 16;
+}
+
+.formheader {
+  text-align: left;
+  font-size: 15;
+  padding-left: 10px;
+  background-color: var(--header_3);
+  margin-top: 5px;
+}
+
+#infopanel {
+  margin-top: 10px;
+}
+
+.genlabel {
+  text-align: center;
+  font-size: 16;
+}
+
+#sometext {
+  padding-top: 10px;
+  text-align: left;
+  font-size: 16;
+}
+
+.featureblock {
+  padding-left: 10px;
+  margin: 0 auto;
+  align-content: left;
+  text-align: left;
+}
+.featurelabel {
+  text-align: left;
+  width: 125px;
+}
+
+.selectorlabel {
+  text-align: left;
+  margin-left: 5px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 180px;
+  height: 2px;
+  color: var(--buttonslider);
+  background: var(--background_1);
+  border-radius: 5px;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  width: 15px; /* Thumb width */
+  height: 15px; /* Thumb height */
+  background: var(--buttonslider); /* Knob color */
+  border-radius: 50%; /* Rounded knob */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 15px; /* Thumb width */
+  height: 15px; /* Thumb height */
+  background: var(--buttonslider); /* Knob color */
+  border-radius: 50%; /* Rounded knob */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.custom-slider::-moz-range-track {
+  height: 1px; /* Track height */
+  background: var(--background_1); /* Filled track color */
+}
+
+#loading_popup {
+  text-align: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+
+#loading_text {
+  color: aliceblue;
+}
+
+#log_text {
+  color: aliceblue;
+}
+
+.rightconstituent {
+  /* height: 33%; */
+  overflow: auto;
+  margin: 5px;
+
+}
+
+#rightconstituenttop {
+  /* height: 45%; */
+  flex-shrink: 0;
+}
+
+#rightconstituentmiddle {
+  /* height: 45%; */
+  flex-grow: 1;
+}
+
+#rightconstituentbottom {
+  height: 40%;
+  /* flex-shrink: 0; */
+}
+
+.scroll {
+  overflow: auto;
+  max-height: 90%;
+}
+
+.rounded_corner {
+  border-radius: 20px;
+  background-color: var(--background_2);
+}
+
+.rounded_corner_top {
+  border-radius: 20px 20px 0px 0px;
+}
+
+#mapcontrols {
+  text-align: center;
+}
+
+#detailscontent {
+  text-align: left;
+  margin-left: 5px;
+}
+
+.main_banner {
+  background-color: var(--header_1);
+}
+
+.footer_buttons {
+  background-color: var(--header_1);
+  color: white;
+}
+
+#footer_button_div {
+  text-align: right;
+  padding-right: 20px;
+}
+/* #imgupload {
+  border: solid;
+} */
+
+#reset_weights_btn {
+  margin-top: 24px;
+  margin-bottom: 15px;
+}
