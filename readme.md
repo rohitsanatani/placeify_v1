@@ -2,6 +2,7 @@
 
 PLACEIFY is a data-driven web application for similarity-based place-referencing in urban design and planning. It enables users to define urban scenarios using images, text, feature values, or real-world locations, and retrieves visually similar places from large-scale street-level image datasets.
 
+![Image-based referencing](samples/sample_results/UI.jpg)
 ![Image-based referencing](samples/sample_results/image_based.jpg)
 
 ## Setup
@@ -63,3 +64,11 @@ http://localhost:5000/
 - Python via Conda environment
 - About 8GB RAM and 8GB VRAM recommended for smooth performance
 - Modern web browser, such as Chrome, Edge, or Firefox
+
+7. Process any external dataset:
+
+- Create a new folder for your dataset in data/urbandata
+- Make sure the dataset_locs.csv file conains the fields "lat", "lon", "filename" corresponding to your dataset images 
+- Run the scripts provided in scripts/generate embeddings to generate .npy embeddings as in the sample data
+- Update th config file to include your dataset
+- Restart the application
