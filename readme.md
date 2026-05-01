@@ -2,7 +2,7 @@
 
 PLACEIFY is a data-driven web application for similarity-based place-referencing in urban design and planning. It enables users to define urban scenarios using images, text, feature values, or real-world locations, and retrieves visually similar places from large-scale street-level image datasets.
 
-![Description](samples/sample_results/image_based.jpg)
+![Image-based referencing](samples/sample_results/image_based.jpg)
 
 ## Setup
 
@@ -51,7 +51,9 @@ http://localhost:5000/
 ## Key Functionalities
 
 - **Image-Based Search:** Upload up to three images or sketches to retrieve visually similar locations using learned image embeddings.
+![Sketch-based referencing](samples/sample_results/sketch_based.jpg)
 - **Text-Based Search:** Enter natural language descriptions, such as “tree-lined residential street,” and retrieve matching locations using a vision-language model.
+![Text-based referencing](samples/sample_results/text_based.jpg)
 - **Feature-Based Exploration:** Adjust urban features, such as greenery and buildings, via sliders to construct hypothetical scenarios and find similar places.
 - **Location-Based Queries:** Select real-world coordinates to generate embeddings from street-view imagery and retrieve similar locations.
 - **Similarity-Space Visualization:** Explore results in an interactive 3D similarity space, where each axis represents similarity to a user-defined scenario.
