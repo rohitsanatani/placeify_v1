@@ -59,16 +59,17 @@ http://localhost:5000/
 - **Location-Based Queries:** Select real-world coordinates to generate embeddings from street-view imagery and retrieve similar locations.
 - **Similarity-Space Visualization:** Explore results in an interactive 3D similarity space, where each axis represents similarity to a user-defined scenario.
 
-## Requirements
-
-- Python via Conda environment
-- About 8GB RAM and 8GB VRAM recommended for smooth performance
-- Modern web browser, such as Chrome, Edge, or Firefox
-
-7. Process any external dataset:
+## Process any external dataset:
 
 - Create a new folder for your dataset in data/urbandata
 - Make sure the dataset_locs.csv file conains the fields "lat", "lon", "filename" corresponding to your dataset images 
 - Run the scripts provided in scripts/generate embeddings to generate .npy embeddings as in the sample data
 - Update th config file to include your dataset
 - Restart the application
+
+
+## Requirements
+
+- Python via Conda environment
+- About 8GB RAM and 8GB VRAM recommended for smooth performance
+- Modern web browser, such as Chrome, Edge, or Firefox
